@@ -1,0 +1,14 @@
+E:\GBG_Project\CarRentalApp\bin\Debug\net10.0\CarRentalApp.exe
+E:\GBG_Project\CarRentalApp\bin\Debug\net10.0\CarRentalApp.deps.json
+E:\GBG_Project\CarRentalApp\bin\Debug\net10.0\CarRentalApp.runtimeconfig.json
+E:\GBG_Project\CarRentalApp\bin\Debug\net10.0\CarRentalApp.dll
+E:\GBG_Project\CarRentalApp\bin\Debug\net10.0\CarRentalApp.pdb
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.GeneratedMSBuildEditorConfig.editorconfig
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.AssemblyInfoInputs.cache
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.AssemblyInfo.cs
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.csproj.CoreCompileInputs.cache
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.dll
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\refint\CarRentalApp.dll
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.pdb
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.genruntimeconfig.cache
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\ref\CarRentalApp.dll
