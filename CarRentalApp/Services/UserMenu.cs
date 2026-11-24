@@ -2,14 +2,16 @@ namespace CarRentalApp;
 
 public class UserMenu
 {
+    private readonly User _user;
     private readonly IVehicleService _vehicleService;
 
-    public UserMenu(IVehicleService vehicleService)
+    public UserMenu(User user, IVehicleService vehicleService)
     {
+        _user = user;
         _vehicleService = vehicleService;
     }
 
-    public void Show(User user)
+    public void Show()
     {
         bool running = true;
 
@@ -37,15 +39,15 @@ public class UserMenu
                     break;
 
                 case 2:
-                    RentVehicle(user);
+                    _user.RentVehicle(_vehicleService);
                     break;
 
                 case 3:
-                    EnquirePrice(user);
+                    _user.PriceEnquire(_vehicleService);
                     break;
 
                 case 4:
-                    user.displayRentedVehicles();
+                    _user.displayRentedVehicles();
                     break;
 
                 case 5:
@@ -58,53 +60,5 @@ public class UserMenu
                     break;
             }
         }
-    }
-
-    private void RentVehicle(User user)
-    {
-        Console.Write("Enter the vehicle ID or name: ");
-        string search = Console.ReadLine();
-
-        Vehicle? vehicle = _vehicleService.FindVehicle(search);
-
-        if (vehicle == null)
-        {
-            Console.WriteLine("Vehicle not found!");
-            return;
-        }
-
-        Console.Write("Enter number of rental days: ");
-
-        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
-        {
-            Console.WriteLine("Please enter a valid number of days.");
-            return;
-        }
-
-        user.RentVehicle(vehicle, days);
-    }
-
-    private void EnquirePrice(User user)
-    {
-        Console.Write("Enter the vehicle ID or name: ");
-        string search = Console.ReadLine() ?? "";
-
-        Vehicle? vehicle = _vehicleService.FindVehicle(search);
-
-        if (vehicle == null)
-        {
-            Console.WriteLine("Vehicle not found!");
-            return;
-        }
-
-        Console.Write("Enter number of rental days: ");
-
-        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
-        {
-            Console.WriteLine("Please enter a valid number of days.");
-            return;
-        }
-
-        user.PriceEnquire(vehicle, days);
     }
 }

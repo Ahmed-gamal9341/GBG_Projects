@@ -5,8 +5,6 @@ class Program
     static void Main(string[] args)
     {
         IVehicleService vehicleService = new VehicleManager();
-
-        UserMenu customerMenu = new UserMenu(vehicleService);
         ManagerMenu managerMenu = new ManagerMenu(vehicleService);
 
         Console.WriteLine("===== CAR RENTAL SYSTEM =====");
@@ -33,7 +31,7 @@ class Program
                 }
 
                 Console.Write("Enter your name: ");
-                string name = Console.ReadLine() ?? "";
+                string name = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -51,15 +49,47 @@ class Program
 
                 User user = new User(ssn, name, phoneNumber);
 
-                Console.WriteLine($"\nWelcome Customer, {user.Name}!");
+                Console.WriteLine($"\nWelcome, {user.Name}!");
 
-                customerMenu.Show(user);
+                UserMenu customerMenu = new UserMenu(user, vehicleService);
+                customerMenu.Show();
                 break;
 
             case 2:
                 Console.WriteLine("\nWelcome Manager!");
 
                 managerMenu.Show();
+                Console.Write("Enter your SSN: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int ssn1))
+                {
+                    Console.WriteLine("Invalid SSN.");
+                    return;
+                }
+
+                Console.Write("Enter your name: ");
+                string name1 = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(name1))
+                {
+                    Console.WriteLine("Name cannot be empty.");
+                    return;
+                }
+
+                Console.Write("Enter your phone number: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int phoneNumber1))
+                {
+                    Console.WriteLine("Invalid phone number.");
+                    return;
+                }
+
+                User user1 = new User(ssn1, name1, phoneNumber1);
+
+                Console.WriteLine($"\nWelcome, {user1.Name}!");
+
+                UserMenu customerMenu1 = new UserMenu(user1, vehicleService);
+                customerMenu1.Show();
                 break;
 
             default:

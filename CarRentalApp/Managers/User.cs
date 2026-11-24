@@ -26,8 +26,26 @@ public class User
         set { _phoneNumber = value; }
     }
 
-    public void RentVehicle(Vehicle vehicle, int days)
+    public void RentVehicle(IVehicleService vehicleService)
     {
+        Console.Write("Enter the vehicle ID or name: ");
+        string search = Console.ReadLine();
+        Vehicle vehicle = vehicleService.FindVehicle(search);
+
+        if (vehicle == null)
+        {
+            Console.WriteLine("Vehicle not found!");
+            return;
+        }
+
+        Console.Write("Enter number of rental days: ");
+
+        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
+        {
+            Console.WriteLine("Please enter a valid number of days.");
+            return;
+        }
+
         if (vehicle.Status == VehicleStatus.Available)
         {
             double cost = vehicle.CalculateRentalCost(days);
@@ -41,8 +59,26 @@ public class User
         }
     }
 
-    public void PriceEnquire(Vehicle vehicle, int days)
+    public void PriceEnquire(IVehicleService vehicleService)
     {
+        Console.Write("Enter the vehicle ID or name: ");
+        string search = Console.ReadLine() ;
+        Vehicle vehicle = vehicleService.FindVehicle(search);
+
+        if (vehicle == null)
+        {
+            Console.WriteLine("Vehicle not found!");
+            return;
+        }
+
+        Console.Write("Enter number of rental days: ");
+
+        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
+        {
+            Console.WriteLine("Please enter a valid number of days.");
+            return;
+        }
+
         double cost = vehicle.CalculateRentalCost(days);
         Console.WriteLine($"Estimated rental cost for {days} days: ${cost}");
     }
