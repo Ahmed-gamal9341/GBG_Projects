@@ -1,8 +1,10 @@
 namespace CarRentalApp;
 
-class VehicleManager
+class VehicleManager : IVehicleService
 {
     private List<Vehicle> vehicles = new List<Vehicle>();
+
+    private List<string> RentedVehicles = new List<string>();
 
 
     public void AddVehicle(Vehicle vehicle)
@@ -61,6 +63,10 @@ class VehicleManager
 
         foreach (Vehicle vehicle in vehicles)
         {
+            if (Enum.GetValues<VehicleStatus>().Contains(VehicleStatus.Rented))
+            {
+                RentedVehicles.Add(vehicle.ID.ToString());
+            }
             vehicle.DisplayInfo();
         }
     }

@@ -12,3 +12,4 @@ E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\refint\CarRentalApp.dll
 E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.pdb
 E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.genruntimeconfig.cache
 E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\ref\CarRentalApp.dll
+E:\GBG_Project\CarRentalApp\obj\Debug\net10.0\CarRentalApp.sourcelink.json

@@ -1,7 +1,7 @@
 
 namespace CarRentalApp;
 
-abstract class Vehicle
+public abstract class Vehicle
 {
     private static int autoIncrementID = 1;
     public int _id;
