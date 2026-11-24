@@ -1,13 +1,12 @@
-
 namespace CarRentalApp;
 
 public class UserMenu
 {
-    private readonly IVehicleManager _manager;
+    private readonly IVehicleService _vehicleService;
 
-    public UserMenu(IVehicleManager manager)
+    public UserMenu(IVehicleService vehicleService)
     {
-        _manager = manager;
+        _vehicleService = vehicleService;
     }
 
     public void Show(User user)
@@ -16,11 +15,11 @@ public class UserMenu
 
         while (running)
         {
-            Console.WriteLine("\n===== USER MENU =====");
-            Console.WriteLine("1. View available vehicles");
-            Console.WriteLine("2. Rent a vehicle");
-            Console.WriteLine("3. Enquire rental price");
-            Console.WriteLine("4. View my rented vehicles");
+            Console.WriteLine("\n===== CUSTOMER MENU =====");
+            Console.WriteLine("1. Display Available Vehicles");
+            Console.WriteLine("2. Rent a Vehicle");
+            Console.WriteLine("3. Enquire About Rental Price");
+            Console.WriteLine("4. Display My Rented Vehicles");
             Console.WriteLine("5. Exit");
 
             Console.Write("Choose an option: ");
@@ -34,36 +33,15 @@ public class UserMenu
             switch (choice)
             {
                 case 1:
-                    _manager.DisplayVehicles();
+                    _vehicleService.DisplayVehicles();
                     break;
 
                 case 2:
+                    RentVehicle(user);
+                    break;
+
                 case 3:
-                    Console.Write("Enter vehicle name or ID: ");
-                    string search = Console.ReadLine() ?? "";
-
-                    Vehicle vehicle = _manager.FindVehicle(search);
-
-                    if (vehicle == null)
-                    {
-                        Console.WriteLine("Vehicle not found.");
-                        break;
-                    }
-
-                    Console.Write("Enter rental duration in days: ");
-
-                    if (!int.TryParse(Console.ReadLine(), out int days)
-                        || days <= 0)
-                    {
-                        Console.WriteLine("Invalid rental duration.");
-                        break;
-                    }
-
-                    if (choice == 2)
-                        user.RentVehicle(vehicle, days);
-                    else
-                        user.PriceEnquire(vehicle, days);
-
+                    EnquirePrice(user);
                     break;
 
                 case 4:
@@ -72,13 +50,61 @@ public class UserMenu
 
                 case 5:
                     running = false;
-                    Console.WriteLine("Goodbye!");
+                    Console.WriteLine("Exiting customer menu...");
                     break;
 
                 default:
-                    Console.WriteLine("Invalid option.");
+                    Console.WriteLine("Invalid choice!");
                     break;
             }
         }
+    }
+
+    private void RentVehicle(User user)
+    {
+        Console.Write("Enter the vehicle ID or name: ");
+        string search = Console.ReadLine();
+
+        Vehicle? vehicle = _vehicleService.FindVehicle(search);
+
+        if (vehicle == null)
+        {
+            Console.WriteLine("Vehicle not found!");
+            return;
+        }
+
+        Console.Write("Enter number of rental days: ");
+
+        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
+        {
+            Console.WriteLine("Please enter a valid number of days.");
+            return;
+        }
+
+        user.RentVehicle(vehicle, days);
+    }
+
+    private void EnquirePrice(User user)
+    {
+        Console.Write("Enter the vehicle ID or name: ");
+        string search = Console.ReadLine() ?? "";
+
+        Vehicle? vehicle = _vehicleService.FindVehicle(search);
+
+        if (vehicle == null)
+        {
+            Console.WriteLine("Vehicle not found!");
+            return;
+        }
+
+        Console.Write("Enter number of rental days: ");
+
+        if (!int.TryParse(Console.ReadLine(), out int days) || days <= 0)
+        {
+            Console.WriteLine("Please enter a valid number of days.");
+            return;
+        }
+
+        user.PriceEnquire(vehicle, days);
     }
 }
